@@ -35,14 +35,10 @@ Your mission, if you choose to accept, is to create a frontend-only solution to 
   - NN Index, i = 2 + 0
   - Encrypted character = NarsissisticNumber(i) = 3 (3 is the 3rd NN in sequence of all valid NN)
 - Append all the numbers one after the other as a string,
-  E.g [2, 5, 6, 153] = "256152"
+  E.g [2, 5, 6, 153] = "256153"
 - Select the max token possible as an index of the alphabet to convert into. A-Z is the range, so, that's 0-25
 
   E.g "256152" = [25], [6], [15], [2] = Z G P C = "ZGPC"
 
 - Encrypted String is the result of the previous operation
 
-### Decryption Algorithm:
-
-- Break the string into the `S<sub>E</sub>` and `Key`
-- Reverse the steps during encryption to get the unencrypted string

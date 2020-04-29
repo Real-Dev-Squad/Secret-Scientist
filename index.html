@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secreate Scientist</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <section class="flex-container">
+      <input class="" type="text" id="textData" />
+
+      <div id="loading-icon"></div>
+
+      <div>
+        <button class="button green" onclick="start('encrypt')">Encrypt</button>
+        <button class="button blue" onclick="start('decrypt')">Decrypt</button>
+      </div>
+
+      <div>
+        <p class="result" id="inpStr"></p>
+        <p class="result" id="outStr"></p>
+      </div>
+    </section>
+
+    <script src="./src/index.js"></script>
+  </body>
+</html>
