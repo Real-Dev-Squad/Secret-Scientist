@@ -1,22 +1,36 @@
-let nnMap = {
-    '10' : 9,
-    '11': 153,
-    '12' : 370,
-    '13' : 371
-}
 
-function encryption(string, key) {
+let nnMap = [];
+
+function encryption(string, key , callback) {
     let stringKey = '';
+    let largestNN = Number.MIN_SAFE_INTEGER;
     for (let char in string) {
-        stringKey += string.charCodeAt(char)%65 + key
+        let phase1= string.charCodeAt(char)%65 + key;
+        stringKey += phase1;
+        if (phase1 > largestNN){
+            largestNN = phase1;
+        }
     }
-    let nnString = '';
-    for (let i = 0 ;  i < stringKey.length-1 ; i += 2) {
-        nnString += nnMap[stringKey[i]+stringKey[i+1]];
+    // wait for the NN-Num to be generated 
+    let preFinalString ='';
+    if(window.Worker) {
+        const  myWorker = new Worker("worker.js");
+        console.log('limit for NN'+ largestNN);
+        myWorker.postMessage(largestNN);
+        myWorker.onmessage = function callback(e) {
+          nnMap = e.data; 
+        let nnString = '';
+        
+    for (let i = 0 ;  i < string.length ; ++i ) {
+        nnString += nnMap[Number((string.charCodeAt(i)%65)+ key)];
+        
     }
-    let preFinalString =''
+    console.log(nnString , "nnstring")
+  
     for (let i = nnString.length-1 ; i >= 0 ; ) {
-        let currentNum = nnString[i-1]+nnString[i];
+        let currentNum = 0;
+        if  (i-1 <0) currentNum = nnString[i] ;
+        else currentNum = nnString[i-1]+nnString[i];
         if (currentNum > 25) {
             preFinalString = preFinalString+String.fromCharCode(Number(nnString[i])+65);
             i--;
@@ -25,11 +39,19 @@ function encryption(string, key) {
             preFinalString = preFinalString + String.fromCharCode(Number(currentNum)+65);
             i -= 2;
         }
+        }
+        console.log(preFinalString , "prefinalstring")
+        callback(preFinalString);
+   
     }
-    return preFinalString;
+   
+    }
+    
+    
     
 
 }
+
 module.exports = {
     encryption
 }

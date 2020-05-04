@@ -1,6 +1,4 @@
-const encrypt = require('./encryption')
-
-
+const encrypt = require('./encryption');
 
 let input = document.querySelector(".string");
 let key = document.querySelector(".key");
@@ -10,7 +8,7 @@ let button = document.querySelector('._button_container');
 p.style.display = "none";
 
 
-input.addEventListener('change',myfunc);
+input.addEventListener('input',myfunc);
 key.addEventListener('change',mykey);
 button.addEventListener('click',myClick);
 let stringValue = "";
@@ -25,6 +23,9 @@ let errorMessages = {
   KEY: "your key should be less than 50",
   EMPTY: "string and key input cannot be empty"
 };
+function showOutput(answer) {
+  output.innerText = answer;
+}
 function mykey(event) {
   keyValue = Number(event.target.value);
 }
@@ -84,16 +85,30 @@ function encryptCheck() {
     }, 5000);
   }
   else {
-    let ans  = encrypt.encryption(stringValue,keyValue);
-    console.log(ans)
-    output.innerText = ans;
+    
+    try {
+      showOutput('wait for answer')
+     encrypt.encryption(stringValue,keyValue,showOutput);
+
+     
+    // console.log('promise' , promise)
+    //  promise.then((ans)=>{
+    //    console.log('hi i will be resolved')
+    //    output.innerText = ans;
+    //  });
+    }
+    catch(e){
+     
+    }
+     // otherwise show spinner 
+     
   }
 
-  console.log(`${errorMsg} and flag ${showAns}`);
+ 
 }
 
 function myClick(event) {
-  console.log("hello container");
+ 
   let m = event.target.classList;
 
   let decryptCheck = "";
