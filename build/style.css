@@ -1,0 +1,59 @@
+input {
+  padding: 7px;
+  border: 3px solid #008080;
+  width: 400px;
+  border-radius: 20px;
+}
+.string {
+  margin-bottom:15px;
+}
+
+._button {
+  width: 150px;
+  color: white;
+  padding: 12px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+}
+.__buttonencrypt {
+  background: green;
+}
+
+._card_container {
+  border: 1px solid;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin : 10%;
+}
+._button_container {
+  display: flex;
+  padding: 10px;
+}
+._modal {
+  margin-left: 70%;
+  border: 1.5px solid black;
+  padding: 7px;
+  width: 200px;
+  z-index: 100;
+  position : fixed;
+  margin-top :-10%;
+}
+.__errormessage {
+  background-color: coral;
+  color: black;
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+.output {
+  color : #008080;
+  width : 200px;
+  height : 70px;
+  border : 1px solid black;
+}
