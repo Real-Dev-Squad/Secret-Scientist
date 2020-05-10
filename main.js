@@ -10,7 +10,9 @@
         ];
 
         return {
-            getAlphabetSequence: (alphabet) => alaphabets.indexOf(alphabet)
+            getAlphabetSequence: (alphabet) => alaphabets.indexOf(alphabet),
+            encrypt: (message, key) => `${message} is encrypted with key ${key}!`,
+            decrypt: (message) => `${message} is decrypted!`
         };
     })();
 
@@ -29,11 +31,10 @@
     })();
 
     const CONTROLLER = ((model, view) => {
-        const encrypt = (message, key) => view.showResult(`${message} encrypted, with key ${key}!!`);
-        const decrypt = (message) => view.showResult(`${message} decrypted!!`);
         const processMessage = () => {
             const [message, key] = view.getMessageDetails();
-            key ? encrypt(message, key) : decrypt(message);
+            const processedString = key ? model.encrypt(message, key) : model.decrypt(message);
+            view.showResult(processedString);
         };
         return {
             setupEventListeners: () => {
