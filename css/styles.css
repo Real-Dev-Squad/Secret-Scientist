@@ -1,6 +1,7 @@
 body {
   margin: 0;
-  box-sizing: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-size: 1.5rem;
 }
 
@@ -9,7 +10,6 @@ body {
   border-radius: 10px;
   display: flex;
   margin: 3rem auto;
-  height: 400px;
   width: 40%;
   flex-direction: column;
   justify-content: space-evenly;
@@ -48,9 +48,8 @@ body {
 }
 
 .result {
-  display: inline;
-  width: inherit;
   margin: 1rem;
+  overflow-wrap: anywhere;
 }
 
 #loading-icon {
@@ -66,6 +65,7 @@ body {
   border: 2px solid black;
   border-radius: 5px;
   padding: 5px;
+  margin: 2rem 0 2rem 0;
   width: inherit;
 }
 
@@ -81,11 +81,10 @@ body {
   .flex-container {
     width: 90%;
   }
-  .result {
-    display: block;
-  }
-  #textData {
-    margin: 2rem 0 2rem 0;
-    width: inherit;
+}
+
+@media screen and (min-width: 400px) and (max-width: 768px) {
+  .flex-container {
+    width: 70%;
   }
 }
