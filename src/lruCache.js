@@ -87,16 +87,6 @@ class DoublyLinkedList {
   return true;
  }
 
- print() {
-  let node = this.head
-  if (!this.head) return null;
-  while (node.next != null) {
-   console.log(node.value);
-   node = node.next;
-  }
-  return true;
- }
-
 }
 
 // <------------------------------------------LRU-CATCH-------------------------------------------------------->
@@ -104,6 +94,11 @@ class DoublyLinkedList {
 /* export default  */
 class LRUCatch {
  constructor(capacity) {
+  const instance = this.constructor.instance;
+  if (instance) {
+   return instance;
+  }
+  this.constructor.instance = this;
   this.maxCapacity = capacity;
   this.capacity = 0;
   this.cache = new Map();						              // Key --> value pair
