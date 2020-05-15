@@ -1,3 +1,5 @@
+'use strict';
+
 class NasissticNumber {
  constructor() {
   const instance = this.constructor.instance;
@@ -5,7 +7,7 @@ class NasissticNumber {
    return instance;
   }
   this.constructor.instance = this;
-  this.narsissticNumber = {};                // {'0': 1, '1': 1,...., '10': 153, '11': 370}
+  this.lru = new LRUCatch(10);            // Reference from ./src/lruCache.js
  }
 
  isNarsissticNumber(num) {
@@ -24,22 +26,21 @@ class NasissticNumber {
  }
 
 
- calcNarsissticNumber(lim) {               // Armstrong Numbers 
-  if (!this.narsissticNumber[lim]) {
-   let num = this.narsissticNumber[Object.keys(this.narsissticNumber).length - 1] + 1 | 0;
-   let i = ((Object.keys(this.narsissticNumber).length) | 0) - 1;
+ calcNarsissticNumber(lim) {               // Armstrong Numbers
+  if (this.lru.get(lim) === false) {
+   let num = 0;
+   let i = -1;
 
    while (i < lim) {
-
     if (this.isNarsissticNumber(num)) {
      i++;
-     this.narsissticNumber[i] = num;
     }
     num = num + 1;
    }
+   this.lru.put(i, num - 1)
   }
 
-  return this.narsissticNumber[lim];
+  return this.lru.get(lim);
  }
 
 }

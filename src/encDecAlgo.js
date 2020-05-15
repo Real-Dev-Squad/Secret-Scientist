@@ -1,6 +1,7 @@
 'use strict';
 importScripts('./narsissticNumber.js');
 importScripts('./charOperation.js');
+importScripts('./lruCache.js')
 
 const ensDecAlgo = (function () {
 

@@ -4,7 +4,8 @@ const secretScientist = (function () {
 
   let hasWorkerStarted = false;
   let myWorker = undefined;
-  const buttons = document.querySelectorAll('div#crypt > button.button');
+  const buttonsCrypt = document.querySelectorAll('div#crypt > button.button');
+  const stopButton = document.getElementById('stop');
 
   function start(action) {
     const textData = (document.querySelector('#textData').value).split('.');
@@ -45,7 +46,8 @@ const secretScientist = (function () {
 
   function blockElements() {
     document.getElementById('loading-icon').style.display = 'block';
-    let buttons = document.querySelectorAll('button');
+    stopButton.style.display = 'block';
+    let buttons = document.querySelectorAll('#crypt button');
     for (let b of buttons) {
       b.classList.add('grayColor');
       b.setAttribute('disabled', true);
@@ -55,6 +57,7 @@ const secretScientist = (function () {
 
   function unBlockElements() {
     document.getElementById('loading-icon').style.display = 'none';
+    stopButton.style.display = 'none';
     let buttons = document.querySelectorAll('#crypt button');
     for (let b of buttons) {
       b.classList.remove('grayColor');
@@ -63,8 +66,16 @@ const secretScientist = (function () {
     document.getElementById('textData').disabled = false;
   }
 
+  function stopProcess() {
+    console.log('hello');
+    myWorker.terminate();
+    hasWorkerStarted = false;
+    unBlockElements();
+  }
+
   const addCryptEventToButton = function () {
-    buttons.forEach(button => {
+    stopButton.addEventListener('click', stopProcess);
+    buttonsCrypt.forEach(button => {
       button.addEventListener('click', function () {
         if (button.hasAttribute('data-name'))
           start(button.getAttribute('data-name'));

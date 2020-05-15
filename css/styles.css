@@ -51,6 +51,10 @@ body {
   margin: 1rem;
   overflow-wrap: anywhere;
 }
+.stop {
+  display: none;
+  background-color: red;
+}
 
 #loading-icon {
   display: none;
