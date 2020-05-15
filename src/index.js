@@ -55,7 +55,7 @@ const secretScientist = (function () {
 
   function unBlockElements() {
     document.getElementById('loading-icon').style.display = 'none';
-    let buttons = document.querySelectorAll('button');
+    let buttons = document.querySelectorAll('#crypt button');
     for (let b of buttons) {
       b.classList.remove('grayColor');
       b.removeAttribute('disabled');
