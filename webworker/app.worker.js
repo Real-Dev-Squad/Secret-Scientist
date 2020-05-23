@@ -5,7 +5,6 @@ const myCache = LRU_CACHE(50);
 
 self.addEventListener('message', (event) => {
 	const numbersWithKey = event.data;
-	console.log(numbersWithKey, 'numbersWithKey');
 
 	const resultArray = [];
 

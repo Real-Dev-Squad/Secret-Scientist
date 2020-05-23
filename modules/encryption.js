@@ -1,5 +1,5 @@
-import { joinArrayAsString } from '../helpers';
 import Worker from '../webworker/app.worker';
+import { encryptNumberWorker } from '../webworker/my-worker';
 
 // const INPUT = 'RAUNAK';
 const KEY = 10;
@@ -39,12 +39,7 @@ function addNumbersWithKey(numbersArray, key) {
  */
 
 function encryptNumbersWithAlgorithm(numbersWithKey) {
-	return new Promise((resolve, reject) => {
-		const myWorker = new Worker();
-		myWorker.postMessage(numbersWithKey);
-		myWorker.addEventListener('message', (event) => resolve(event.data));
-		myWorker.addEventListener('error', reject);
-	})
+	return encryptNumberWorker(numbersWithKey)
 		.then((results) => {
 			return results;
 		})
@@ -87,28 +82,22 @@ function mapEncryptedKeysToWord(keys) {
 	for (let key of keys) {
 		charactersArray.push(String.fromCharCode(65 + key[0]));
 	}
-	return joinArrayAsString(charactersArray);
+	return charactersArray.join('');
 }
 
 function encyptionModule(word) {
 	const numberArray = mapWordToNumbers(word);
 	const numbersWithKey = addNumbersWithKey(numberArray, KEY);
-	console.log(numbersWithKey, 'numbersWithKey');
 	return new Promise((resolve, reject) => {
 		encryptNumbersWithAlgorithm(numbersWithKey)
 			.then((res) => {
-				console.log(res, 'RES');
 				let encyptedNumbers = res;
-				console.log(encyptedNumbers, 'encyptedNumbers');
-				const joinedArray = joinArrayAsString(encyptedNumbers);
-				console.log(joinedArray, 'joinedArray');
+				const joinedArray = encyptedNumbers.join('');
 				const encryptedTokenBlocks = convertEncryptedStringToMaxTokenBlocks(
 					joinedArray,
 					MAX_TOKEN
 				);
-				console.log(encryptedTokenBlocks, 'encryptedTokenBlocks');
 				const encryptedWord = mapEncryptedKeysToWord(encryptedTokenBlocks);
-				console.log(encryptedWord, 'encryptedWord');
 				resolve(encryptedWord);
 			})
 			.catch((err) => reject(err));

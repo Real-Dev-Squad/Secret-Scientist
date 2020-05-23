@@ -8,14 +8,14 @@ function nnGenerator(num) {
 	while (i) {
 		if (digit_pow(i) === i) {
 			if (numberArray[num - 1]) {
-				break;
+				return numberArray[num - 1];
 			} else {
 				numberArray[count++] = i;
 			}
 		}
 		i++;
 	}
-	return numberArray[num - 1];
+	return false;
 }
 
 export default nnGenerator;

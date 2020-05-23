@@ -1,3 +1,6 @@
-export const joinArrayAsString = (arr) => {
-	return arr.join('');
+export const containsJustCharacters = (inputVal) => {
+	if (!/^[a-zA-Z]+$/.test(inputVal)) {
+		return false;
+	}
+	return true;
 };
